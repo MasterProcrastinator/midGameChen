@@ -15,17 +15,16 @@ public class Vehicle{
     
     var dx: Int
     var dy: Int
-    var x: Int
+    var x: Double
    
     
 
 
     
-    public init(image: String, width: Int, height: Int, mass: Int = 10000, dx: Int, dy: Int, x: Int) {
+    public init(image: String, width: Int, height: Int, dx: Int, dy: Int, x: Double) {
         self.image = image
         self.width = width
         self.height = height
-        self.mass = mass
         self.dx = dx
         self.dy = dy
         self.x = x

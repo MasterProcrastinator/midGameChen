@@ -431,7 +431,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if (list[i].x <= 1) {
                     //right
-                    if (Int(((testList[i]?.position.x)!)) > -1 * list[i].x){
+                    if (Double(((testList[i]?.position.x)!)) > -1 * list[i].x){
                         testList[i]?.position.x = CGFloat((list[i].x))
                         //cars going right dont work
                         //left negative // right positive
@@ -442,7 +442,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 else if (list[i].x > 1){
                     //left
-                    if (Int((testList[i]?.position.x)!) < -1 * list[i].x){
+                    if (Double((testList[i]?.position.x)!) < -1 * list[i].x){
                         testList[i]?.position.x = CGFloat(list[i].x)
                     }
                 }
@@ -808,24 +808,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         stopTimer()
     }
     
-    func debugTeleportation(){
-        player.physicsBody?.velocity.dx = 0
-        player.physicsBody?.velocity.dy = 0
-        gameOver = false
-        winLoseOutlet.text = ""
-        player.physicsBody?.friction = 0
-        player.zPosition = 0
-        player.zRotation = 0
-        player.physicsBody?.allowsRotation = false
-        player.position.y = debugTeleport
-        player.position.x = 0
-        invisFollower.position.y = player.position.y
-        player.removeAllActions()
-        let rotateAction = SKAction.rotate(toAngle: 0, duration: 0)
-        player.run(rotateAction)
-        invisFollower.removeAllActions()
-        gameTimer = 0
-    }
+
     func sjump(){
 //        let sjump = SKAudioNode(fileNamed: "sidejump")
 //        addChild(sjump)
