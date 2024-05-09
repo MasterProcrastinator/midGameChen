@@ -38,16 +38,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var meteor2: SKSpriteNode!
     var meteor3: SKSpriteNode!
     var meteor4: SKSpriteNode!
+    var moreIce: SKSpriteNode!
+    var moreCrystal: SKSpriteNode!
+    var iceberg: SKSpriteNode!
+    var leviathan: SKSpriteNode!
+    var shark: SKSpriteNode!
+    var titanic: SKSpriteNode!
+    var worseShark: SKSpriteNode!
+    var sub: SKSpriteNode!
+    var ship: SKSpriteNode!
+    var penguinSwim: SKSpriteNode!
+    var orca: SKSpriteNode!
     
-    var lastCheckpoint = -800
-    var checkpoint1 = -800
+    
+    
+    
+    var restricted = false
+    
+    var lastCheckpoint = 0
+    var checkpoint1 = 0
     var checkpoint2 = 2700
     var checkpoint3 = 8800
     var checkpoint4 = 12800
     var checkpoint5 = 16100
     var checkpoint6 = 17400
     var checkpoint7 = 18700
+    var checkpoint8 = 33000
+    var checkpoint9 = 36300
     
+    var trueCheckpoint = 0
     
     
     
@@ -68,11 +87,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Vehicle(image: "car3", width: 141, height: 90, dx: 400, dy: 0, x: -480),
                 Vehicle(image: "car4", width: 175, height: 100, dx: 450, dy: 0, x: -480),
                 Vehicle(image: "car5", width: 114, height: 60, dx: -500, dy: 0, x: 480),
-                Vehicle(image: "car6", width: 80, height: 60, dx: 1000, dy: 0, x: -480),
                 Vehicle(image: "car7", width: 305, height: 185, dx: -800, dy: 0, x: 900),
                 Vehicle(image: "car8", width: 1000, height: 127, dx: 100, dy: 0, x: -1000),
                 Vehicle(image: "penguin", width: 60, height: 60, dx: 50, dy: 0, x: -480),
-                Vehicle(image: "pbear", width: 300, height: 100, dx: 50, dy: 0, x: -480),
+                Vehicle(image: "pbear", width: 220, height: 200, dx: 160, dy: 0, x: -480),
                 Vehicle(image: "whiteFox", width: 160, height: 50, dx: -300, dy: 0, x: 480),
                 Vehicle(image: "snowmobile", width: 175, height: 100, dx: 400, dy: 0, x: -480),
                 Vehicle(image: "iceTrain", width: 2000, height: 150, dx: -50, dy: 0, x: 750),
@@ -84,7 +102,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Vehicle(image: "spider", width: 80, height: 70, dx: 150, dy: 0, x: -400),
                 Vehicle(image: "desertScourge", width: 400, height: 80, dx: -300, dy: 0, x: 400),
                 Vehicle(image: "sandShark", width: 200, height: 80, dx: -250, dy: 0, x: 400),
-                Vehicle(image: "spider2", width: 80, height: 70, dx: -200, dy: 0, x: 400)
+                Vehicle(image: "spider2", width: 80, height: 70, dx: -200, dy: 0, x: 400),
+                Vehicle(image: "moreIce", width: 512, height: 512, dx: 0, dy: 0, x: 1000),
+                Vehicle(image: "moreCrystal", width: 480, height: 200, dx: 0, dy: 0, x: 1000),
+                Vehicle(image: "iceberg", width: 150, height: 150, dx: 0, dy: 0, x: 1000),
+                Vehicle(image: "leviathan", width: 1500, height: 1000, dx: -100, dy: 0, x: 900),
+                Vehicle(image: "shark", width: 700, height: 400, dx: -300, dy: 0, x: 500),
+                Vehicle(image: "titanic", width: 1300, height: 400, dx: 200, dy: 0, x: -600),
+                Vehicle(image: "worseShark", width: 400, height: 240, dx: -500, dy: 0, x: 480),
+                Vehicle(image: "sub", width: 400, height: 270, dx: 240, dy: 0, x: -480),
+                Vehicle(image: "ship", width: 400, height: 285, dx: -260, dy: 0, x: 500),
+                Vehicle(image: "penguinSwim", width: 170, height: 190, dx: -400, dy: 0, x: 480),
+                Vehicle(image: "orca", width: 300, height: 130, dx: 350, dy: 0, x: -480)
+                
+ 
+                
 
                 
     ]
@@ -109,7 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var debugTeleport = 0.0
     var distance = 0
     var farthestDistance = 0
-    var lives = 5
+    var lives = 15
     var invisFollower: SKSpriteNode!
     var livesLabel: SKLabelNode!
     let defaults = UserDefaults.standard
@@ -150,8 +182,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        
-        var testList = [car, car2, car3 ,car4, car5, car6, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark]
+        //33
+        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
         
         
         
@@ -181,47 +213,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             penguin.physicsBody?.mass = 0.0001
         }
         
+        enumerateChildNodes(withName: "car6") { [self]
+            (node, _) in
+            
+            car6 = node as? SKSpriteNode
+            car6.texture = SKTexture(imageNamed: "car6")
+            car6.physicsBody?.mass = 10000
+            car6.size.width = 1500
+            car6.size.height = 1500
+            
+            
+            
+        }
         //meteors go downward
         
         enumerateChildNodes(withName: "meteor") { [self]
             (node, _) in
             meteor = node as? SKSpriteNode
 
-            meteor = node as? SKSpriteNode
             meteor.texture = SKTexture(imageNamed: "meteor")
-            //meteor.size.width =
-            //meteor.size.height =
-            meteor.physicsBody?.mass = 200
+            meteor.size.width = 120
+            meteor.size.height = 230
+            meteor.physicsBody?.mass = 10000
         }
+        
         enumerateChildNodes(withName: "meteor2") { [self]
             (node, _) in
             meteor2 = node as? SKSpriteNode
 
-            meteor2 = node as? SKSpriteNode
             meteor2.texture = SKTexture(imageNamed: "meteor2")
-            //meteor.size.width =
-            //meteor.size.height =
-            meteor2.physicsBody?.mass = 200
+            meteor2.size.width = 80
+            meteor2.size.height = 80
+            meteor2.physicsBody?.mass = 10000
         }
+        
         enumerateChildNodes(withName: "meteor3") { [self]
             (node, _) in
-            meteor = node as? SKSpriteNode
-
             meteor3 = node as? SKSpriteNode
+
             meteor3.texture = SKTexture(imageNamed: "meteor3")
-            //meteor.size.width =
-            //meteor.size.height =
-            meteor3.physicsBody?.mass = 200
+            meteor3.size.width = 120
+            meteor3.size.height = 120
+            meteor3.physicsBody?.mass = 10000
         }
+        
         enumerateChildNodes(withName: "meteor4") { [self]
             (node, _) in
             meteor4 = node as? SKSpriteNode
 
-            meteor4 = node as? SKSpriteNode
             meteor4.texture = SKTexture(imageNamed: "meteor4")
-            //meteor.size.width =
-            //meteor4.size.height =
-            meteor4.physicsBody?.mass = 200
+            meteor4.size.width = 100
+            meteor4.size.height = 180
+            meteor4.physicsBody?.mass = 10000
         }
         
         
@@ -230,24 +273,67 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
+        if player.position.y >= 40500{
+            restricted = true
+            
+            if (player.position.y < 42400 && player.position.x < 400 && player.position.x > -400){
+                player.physicsBody?.velocity.dy = 300
+            }
+            else if (player.position.y > 42500 && player.position.x < 400 && player.position.x > -400){
+                player.physicsBody?.velocity.dy = 0
+
+            }
+            
+
+        }
+        else{
+            restricted = false
+        }
+        
+        if (player.position.y > 42500 && player.position.x < 400 && player.position.x > -400){
+            cam.position.x = invisFollower.position.x - 300
+        }
+        
+        else{
+            cam.position.x = invisFollower.position.x
+        }
         //checkpoint code
         if player.position.y < CGFloat(checkpoint2){
             lastCheckpoint = checkpoint1
+            trueCheck()
         }
         else if (player.position.y >= CGFloat(checkpoint2) && player.position.y < CGFloat(checkpoint3)){
             lastCheckpoint = checkpoint2
+            trueCheck()
         }
         else if (player.position.y >= CGFloat(checkpoint3) && player.position.y < CGFloat(checkpoint4)){
             lastCheckpoint = checkpoint3
+            trueCheck()
         }
         else if (player.position.y >= CGFloat(checkpoint4) && player.position.y < CGFloat(checkpoint5)){
             lastCheckpoint = checkpoint4
+            trueCheck()
         }
         else if (player.position.y >= CGFloat(checkpoint5) && player.position.y < CGFloat(checkpoint6)){
             lastCheckpoint = checkpoint5
+            trueCheck()
         }
         else if (player.position.y >= CGFloat(checkpoint6) && player.position.y < CGFloat(checkpoint7)){
             lastCheckpoint = checkpoint6
+            trueCheck()
+        }
+        else if (player.position.y >= CGFloat(checkpoint7) && player.position.y < CGFloat(checkpoint8)){
+            lastCheckpoint = checkpoint7
+            trueCheck()
+        }
+        
+        else if (player.position.y >= CGFloat(checkpoint8) && player.position.y < CGFloat(checkpoint9)){
+            lastCheckpoint = checkpoint8
+            trueCheck()
+        }
+        else if (player.position.y >= CGFloat(checkpoint9) && player.position.y < 44000){
+            lastCheckpoint = checkpoint9
+            trueCheck()
         }
         
         //continue once done with space
@@ -268,19 +354,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timeLabel.text = "distance: \(distance)"
         farthestLabel.text = "farthest: \(farthestDistance)"
-        farthestLabel.position.y = cam.position.y + 500
-        farthestLabel.position.x = cam.position.x + 220
-        timeLabel.position.y = cam.position.y + 550
-        timeLabel.position.x = cam.position.x + 190
+        farthestLabel.position.y = invisFollower.position.y + 800
+        farthestLabel.position.x = invisFollower.position.x + 220
+        timeLabel.position.y = invisFollower.position.y + 850
+        timeLabel.position.x = invisFollower.position.x + 190
         farthestLabel.fontName = "AvenirNext-Bold"
         timeLabel.fontName = "AvenirNext-Bold"
 
         livesLabel.text = "Lives: \(lives)"
-        livesLabel.position.y = cam.position.y + 450
-        livesLabel.position.x = cam.position.x
+        livesLabel.position.y = invisFollower.position.y + 750
+        livesLabel.position.x = invisFollower.position.x
         
         livesLabel.fontName = "AvenirNext-Bold"
-        cam.position.x = invisFollower.position.x
         cam.position.y = invisFollower.position.y + 300
         winLoseOutlet.position.y = cam.position.y
         
@@ -289,23 +374,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.physicsBody?.velocity.dy = 0
             player.physicsBody?.friction = 0
             player.position.x = 0
-            player.position.y = 34000
+            player.position.y = 33000
             invisFollower.position.y = player.position.y
             player.removeAllActions()
             invisFollower.removeAllActions()
         }
-        
-        if (player.position.y >= invisFollower.position.y + 600){
-            let moveFollower = SKAction.moveTo(y: player.position.y, duration: 1)
-            invisFollower.run(moveFollower)
+        if(player.position.y > 20000 && player.position.y < 32000){
+            
+            if (player.position.y >= invisFollower.position.y + 200){
+                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.5)
+                invisFollower.run(moveFollower)
+                
+            }
+            
+            if (player.position.y <= invisFollower.position.y - 50){
+                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.3)
+                invisFollower.run(moveFollower)
+            }
             
         }
-        
-        if (player.position.y <= invisFollower.position.y - 50){
-            let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.3)
-            invisFollower.run(moveFollower)
+        else{
+            if (player.position.y >= invisFollower.position.y + 500){
+                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 1)
+                invisFollower.run(moveFollower)
+                
+            }
+            
+            if (player.position.y <= invisFollower.position.y - 50){
+                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.3)
+                invisFollower.run(moveFollower)
+            }
         }
-        
         
         
         let count = list.count
@@ -313,7 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        var testList = [car, car2, car3 ,car4, car5, car6, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark]
+        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
         
         for i in 0...count-1{
             
@@ -324,8 +423,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 testList[i] = node as? SKSpriteNode
                 testList[i]!.physicsBody?.velocity.dx = CGFloat(list[i].dx)
                 testList[i]!.physicsBody?.velocity.dy = CGFloat(list[i].dy)
-                
-                //add special feature for car6
+
                 
                 
                 
@@ -367,7 +465,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                          (node, _) in
             meteor = node as? SKSpriteNode
             meteor.physicsBody?.velocity.dx = 0
-            //meteor.physicsBody?.velocity.dy = -350
+            meteor.physicsBody?.velocity.dy = -250
             
             if (meteor.position.x < -370 || meteor.position.x > 370 || meteor.position.y < 22000){
                 let randomInt = Int.random(in: -300...300)
@@ -379,11 +477,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         }
         
+        enumerateChildNodes(withName: "car6") { [self]
+                         (node, _) in
+            car6 = node as? SKSpriteNode
+            if(player.position.y > 42500){
+                car6.physicsBody?.velocity.dx = 1300
+            }
+            else{
+                car6.physicsBody?.velocity.dx = 0
+            }
+            
+
+
+        }
+        
         enumerateChildNodes(withName: "meteor2") { [self]
                          (node, _) in
             meteor2 = node as? SKSpriteNode
             meteor2.physicsBody?.velocity.dx = 0
-            //meteor.physicsBody?.velocity.dy = -350
+            meteor2.physicsBody?.velocity.dy = -250
             
             if (meteor2.position.x < -370 || meteor2.position.x > 370 || meteor2.position.y < 22000){
                 let randomInt = Int.random(in: -300...300)
@@ -399,7 +511,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                          (node, _) in
             meteor3 = node as? SKSpriteNode
             meteor3.physicsBody?.velocity.dx = 0
-            //meteor.physicsBody?.velocity.dy = -350
+            meteor3.physicsBody?.velocity.dy = -250
             
             if (meteor3.position.x < -370 || meteor3.position.x > 370 || meteor3.position.y < 22000){
                 let randomInt = Int.random(in: -300...300)
@@ -415,7 +527,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                          (node, _) in
             meteor4 = node as? SKSpriteNode
             meteor4.physicsBody?.velocity.dx = 0
-            //meteor.physicsBody?.velocity.dy = -350
+            meteor4.physicsBody?.velocity.dy = -250
             
             if (meteor4.position.x < -370 || meteor4.position.x > 370 || meteor4.position.y < 22000){
                 let randomInt = Int.random(in: -300...300)
@@ -447,11 +559,82 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOver = true
         GameOver()
     }
+
+
     
     func didBegin(_ contact: SKPhysicsContact) {
         
+        
+        if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "car6") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "car6"){
+            
+            lives = 0
+            winLoseOutlet.text = "You Won?"
+            player.physicsBody?.velocity.dx = 0
+            player.physicsBody?.velocity.dy = 0
+            player.position.x = -10000
+            player.position.y = 42500
+            player.physicsBody?.friction = 0
+            invisFollower.position.y = player.position.y
+            invisFollower.position.x = player.position.x
+            gameOver = true
+            GameOver()
+        }
+        
+        if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "meteor") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "meteor"){
+            
+            if(lives > 1){
+                lives-=1
+                teleportLastCheckpoint()
+            }
+            else{
+                crash()
+            }
+            
+        }
+        
+        if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "meteor2") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "meteor2"){
+            
+            if(lives > 1){
+                lives-=1
+                teleportLastCheckpoint()
+            }
+            else{
+                crash()
+            }
+            
+        }
+        
+        if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "meteor3") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "meteor3"){
+            
+            if(lives > 1){
+                lives-=1
+                teleportLastCheckpoint()
+            }
+            else{
+                crash()
+            }
+            
+        }
+        
+        if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "meteor4") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "meteor4"){
+            
+            if(lives > 1){
+                lives-=1
+                teleportLastCheckpoint()
+            }
+            else{
+                crash()
+            }
+            
+        }
+        
+        
         let count = list.count
         for i in 0...count-1{
+            
+            
+        
+            
             
             
             if (contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == list[i].image) || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == list[i].image){
@@ -463,7 +646,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     else if(lives > 1){
                         lives-=1
                         teleportLastCheckpoint()
-                        print("should have tped")
                     }
                     else{
                         crash()
@@ -494,6 +676,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func stopTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+    }
     @objc func updateTimer(){
         gameTimer += 1
     }
@@ -501,67 +686,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //add keys for the movements below
     
     func jumpUp(){
-        fjump()
-        if gameOver == false{
-            if(player.position.y > 6820 && player.position.y < 16000){
-                let slowedJumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.6)
-                player.run(slowedJumpAction)
-            }
-            else if(player.position.y >= 16000 && player.position.y < 19000){
-                let fastJumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.15)
-                player.run(fastJumpAction)
-            }
-            else if(player.position.y >= 20800 && player.position.y < 31000){
-                let spaceJumpAction = SKAction.moveBy(x: 0, y: 300, duration: 0.9)
-                player.run(spaceJumpAction)
-            }
-            else{
-                let jumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.3)
-                player.run(jumpAction)
+        if restricted == false{
+            if gameOver == false{
+                fjump()
+                if(player.position.y > 6820 && player.position.y < 16000){
+                    let slowedJumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.6)
+                    player.run(slowedJumpAction)
+                }
+                else if(player.position.y >= 16000 && player.position.y < 19000){
+                    let fastJumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.15)
+                    player.run(fastJumpAction)
+                }
+                else if(player.position.y >= 20800 && player.position.y < 31000){
+                    let spaceJumpAction = SKAction.moveBy(x: 0, y: 300, duration: 0.9)
+                    player.run(spaceJumpAction)
+                }
+                else{
+                    let jumpAction = SKAction.moveBy(x: 0, y: 100, duration: 0.3)
+                    player.run(jumpAction)
+                }
             }
         }
     }
     
     func jumpDown(){
-        fjump()
-        if gameOver == false{
-            if(player.position.y > 6820 && player.position.y < 16000){
-                let slowedJumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.6)
-                player.run(slowedJumpAction)
-            }
-            else if(player.position.y >= 16000 && player.position.y < 19000){
-                let fastJumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.15)
-                player.run(fastJumpAction)
-            }
-            else if(player.position.y >= 20800 && player.position.y < 31000){
-                let spaceJumpAction = SKAction.moveBy(x: 0, y: -300, duration: 0.9)
-                player.run(spaceJumpAction)
-            }
-            else{
-                let jumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.3)
-                player.run(jumpAction)
+        if restricted == false{
+            if gameOver == false{
+                fjump()
+                if(player.position.y > 6820 && player.position.y < 16000){
+                    let slowedJumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.6)
+                    player.run(slowedJumpAction)
+                }
+                else if(player.position.y >= 16000 && player.position.y < 19000){
+                    let fastJumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.15)
+                    player.run(fastJumpAction)
+                }
+                else if(player.position.y >= 20800 && player.position.y < 31000){
+                    let spaceJumpAction = SKAction.moveBy(x: 0, y: -300, duration: 0.9)
+                    player.run(spaceJumpAction)
+                }
+                else{
+                    let jumpAction = SKAction.moveBy(x: 0, y: -100, duration: 0.3)
+                    player.run(jumpAction)
+                }
             }
         }
     }
     
     func jumpLeft(){
-        sjump()
-        if gameOver == false{
-            if(player.position.y > 6820 && player.position.y < 16000){
-                let slowedJumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.35)
-                player.run(slowedJumpAction)
-            }
-            else if(player.position.y >= 16000 && player.position.y < 19000){
-                let fastJumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.075)
-                player.run(fastJumpAction)
-            }
-            else if(player.position.y >= 20800 && player.position.y < 31000){
-                let spaceJumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.3)
-                player.run(spaceJumpAction)
-            }
-            else {
-                let jumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.15)
-                player.run(jumpAction)
+        if restricted == false{
+            if gameOver == false{
+                sjump()
+                if(player.position.y > 6820 && player.position.y < 16000){
+                    let slowedJumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.35)
+                    player.run(slowedJumpAction)
+                }
+                else if(player.position.y >= 16000 && player.position.y < 19000){
+                    let fastJumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.075)
+                    player.run(fastJumpAction)
+                }
+                else {
+                    let jumpAction = SKAction.moveBy(x: -100, y: 0, duration: 0.15)
+                    player.run(jumpAction)
+                }
             }
         }
     }
@@ -569,26 +756,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func jumpRight(){
 //        let sidejump = SKAudioNode(fileNamed: "sidejump")
 //        addChild(sidejump)
-        sjump()
-        if gameOver == false{
-            if(player.position.y > 6820 && player.position.y < 16000){
-                let slowedJumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.35)
-                player.run(slowedJumpAction)
-            }
-            else if(player.position.y >= 16000 && player.position.y < 19000){
+        if restricted == false{
+            if gameOver == false{
+                sjump()
+                if(player.position.y > 6820 && player.position.y < 16000){
+                    let slowedJumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.35)
+                    player.run(slowedJumpAction)
+                }
+                else if(player.position.y >= 16000 && player.position.y < 19000){
                     let fastJumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.075)
                     player.run(fastJumpAction)
-            }
-            else if(player.position.y >= 20800 && player.position.y < 31000){
-                let spaceJumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.3)
-                player.run(spaceJumpAction)
-            }
-            else{
-                let jumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.15)
-                player.run(jumpAction)
+                }
+                else{
+                    let jumpAction = SKAction.moveBy(x: 100, y: 0, duration: 0.15)
+                    player.run(jumpAction)
+                }
             }
         }
-        
     }
     
     
@@ -596,8 +780,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func GameOver(){
         player.physicsBody?.velocity.dy = 0
         player.physicsBody?.velocity.dx = 0
-        
-        
     }
     
     func restart(){
@@ -609,16 +791,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.zPosition = 1
         player.zRotation = 0
         player.physicsBody?.allowsRotation = false
-        player.position.y = -800
+        player.position.y = 0
         player.position.x = 0
         invisFollower.position.y = player.position.y
+        invisFollower.position.x = player.position.x
         player.removeAllActions()
         let rotateAction = SKAction.rotate(toAngle: 0, duration: 0)
         player.run(rotateAction)
         player.physicsBody?.allowsRotation = false
         invisFollower.removeAllActions()
         gameTimer = 0
-        lives = 5
+        lives = 15
+        trueCheckpoint = 0
+        car6.position.x = -4000
+        car6.physicsBody?.velocity.dx = 0
+        stopTimer()
     }
     
     func debugTeleportation(){
@@ -665,8 +852,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.zPosition = 1
         //player.position.y = (CGFloat)(lastCheckpoint)
         player.removeAllActions()
-        let tpBack = SKAction.moveTo(y: (CGFloat)(lastCheckpoint), duration: 0)
+        let tpBack = SKAction.moveTo(y: (CGFloat)(trueCheckpoint), duration: 0)
         player.run(tpBack)
+        let tpBackX = SKAction.moveTo(x: 0, duration: 0)
+        player.run(tpBackX)
         player.position.x = 0
         invisFollower.position.y = player.position.y
 
@@ -675,7 +864,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    
+    func trueCheck(){
+        if(trueCheckpoint < lastCheckpoint){
+            trueCheckpoint = lastCheckpoint
+        }
+        
+    }
     
     
     

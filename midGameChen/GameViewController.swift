@@ -97,7 +97,9 @@ class GameViewController: UIViewController {
                     play.jumpRight()
                 }
             case UISwipeGestureRecognizer.Direction.down:
-                play.jumpDown()
+                if play.player.position.y > -200{
+                    play.jumpDown()
+                }
             case UISwipeGestureRecognizer.Direction.left:
                 if play.player
                     .position.x > -230{

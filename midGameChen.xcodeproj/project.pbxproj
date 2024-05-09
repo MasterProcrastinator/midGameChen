@@ -126,8 +126,9 @@
 			children = (
 				BFDB8C222B97741000170A23 /* AppDelegate.swift */,
 				BFDB8C242B97741000170A23 /* GameScene.sks */,
-				BFDB8C262B97741000170A23 /* Actions.sks */,
 				BFDB8C282B97741000170A23 /* GameScene.swift */,
+				BFDB8C262B97741000170A23 /* Actions.sks */,
+				BFDB8C2F2B97741200170A23 /* Assets.xcassets */,
 				4C1EEE1C2BD2B5730027F5B9 /* Vehicle.swift */,
 				BFDB8C2A2B97741000170A23 /* GameViewController.swift */,
 				BFDB8C2C2B97741000170A23 /* Main.storyboard */,
@@ -141,7 +142,6 @@
 				3E402E562BE92A7B0098333E /* death3.mp3 */,
 				3E402E582BE92A820098333E /* death4.mp3 */,
 				3E402E522BE92A6E0098333E /* death1.wav */,
-				BFDB8C2F2B97741200170A23 /* Assets.xcassets */,
 				BFDB8C312B97741200170A23 /* LaunchScreen.storyboard */,
 			);
 			path = midGameChen;
