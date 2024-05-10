@@ -78,7 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var test = Vehicle(image: "car", width: 0, height: 0, dx: 0, dy: 0, x: 0)
     var deathsounds = [SKAudioNode(fileNamed: "death1"),SKAudioNode(fileNamed: "death2"),SKAudioNode(fileNamed: "death3"),SKAudioNode(fileNamed: "death4"),SKAudioNode(fileNamed: "death5"),SKAudioNode(fileNamed: "death6"),SKAudioNode(fileNamed: "death7"),SKAudioNode(fileNamed: "death8")
     ]
-    
+    var deathsoundnums = ["death1","death2","death3","death4","death5","death6","death7","death8"]
     
     
     
@@ -823,8 +823,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     func deathaffect(){
-        let randomInt = Int.random(in: 0..<7)
-        player.run(SKAction.playSoundFileNamed("\(deathsounds[randomInt])",waitForCompletion:false));
+        var randomInt = Int.random(in : 1...7)
+                var deathsoundOfChoice = deathsoundnums[randomInt]
+                player.run(SKAction.playSoundFileNamed("\(deathsoundOfChoice)",waitForCompletion:false));
 
     }
     
