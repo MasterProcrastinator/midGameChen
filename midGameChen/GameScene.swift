@@ -55,6 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var restricted = false
     
+    var wins = 0
     var lastCheckpoint = 0
     var checkpoint1 = 0
     var checkpoint2 = 2700
@@ -135,6 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var timeLabel: SKLabelNode!
     var farthestLabel: SKLabelNode!
+    var winsLabel: SKLabelNode!
     
     var gameTimer = 0
     var timer = Timer()
@@ -148,7 +150,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-         
+        wins = defaults.integer(forKey: "win")
+        
         farthestDistance = defaults.integer(forKey: "dist")
         
         
@@ -158,8 +161,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timeLabel = (self.childNode(withName: "timeLabel") as! SKLabelNode)
         farthestLabel = (self.childNode(withName: "farthestLabel") as! SKLabelNode)
         livesLabel = (self.childNode(withName: "livesLabel") as! SKLabelNode)
+        winsLabel = (self.childNode(withName: "winsLabel") as! SKLabelNode)
         lives = 5
         timeLabel.fontSize = 30
+        
         winLoseOutlet = (self.childNode(withName: "statusLabel") as! SKLabelNode)
         winLoseOutlet.fontSize = 100
         winLoseOutlet.text = ""
@@ -354,12 +359,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timeLabel.text = "distance: \(distance)"
         farthestLabel.text = "farthest: \(farthestDistance)"
+        winsLabel.text = "Wins: \(wins)"
         farthestLabel.position.y = invisFollower.position.y + 800
         farthestLabel.position.x = invisFollower.position.x + 220
         timeLabel.position.y = invisFollower.position.y + 850
         timeLabel.position.x = invisFollower.position.x + 190
+        winsLabel.position.y = invisFollower.position.y + 750
+        winsLabel.position.x = invisFollower.position.x + 220
         farthestLabel.fontName = "AvenirNext-Bold"
         timeLabel.fontName = "AvenirNext-Bold"
+        winsLabel.fontName = "AvenirNext-Bold"
 
         livesLabel.text = "Lives: \(lives)"
         livesLabel.position.y = invisFollower.position.y + 750
@@ -553,7 +562,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func crash(){
         deathaffect()
         winLoseOutlet.text = "You Died"
-        player.physicsBody?.allowsRotation = true
         player.physicsBody?.friction = 0.5
         player.removeAllActions()
         gameOver = true
@@ -569,6 +577,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             lives = 0
             winLoseOutlet.text = "You Won?"
+            wins = wins + 1
+            defaults.set(wins, forKey: "win")
             player.physicsBody?.velocity.dx = 0
             player.physicsBody?.velocity.dy = 0
             player.position.x = -10000
