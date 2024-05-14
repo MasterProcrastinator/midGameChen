@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ship: SKSpriteNode!
     var penguinSwim: SKSpriteNode!
     var orca: SKSpriteNode!
-    var farDead = false
+    var farDeadd = false
     var future1: SKSpriteNode!
     var future2: SKSpriteNode!
     var future3: SKSpriteNode!
@@ -57,6 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var restricted = false
     
+    var wins = 0
     var lastCheckpoint = 0
     var checkpoint1 = 0
     var checkpoint2 = 2700
@@ -80,7 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var test = Vehicle(image: "car", width: 0, height: 0, dx: 0, dy: 0, x: 0)
     var deathsounds = [SKAudioNode(fileNamed: "death1"),SKAudioNode(fileNamed: "death2"),SKAudioNode(fileNamed: "death3"),SKAudioNode(fileNamed: "death4"),SKAudioNode(fileNamed: "death5"),SKAudioNode(fileNamed: "death6"),SKAudioNode(fileNamed: "death7"),SKAudioNode(fileNamed: "death8")
     ]
-    
+    var deathsoundnums = ["death1","death2","death3","death4","death5","death6","death7","death8"]
     
     
     
@@ -137,6 +138,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var timeLabel: SKLabelNode!
     var farthestLabel: SKLabelNode!
+    var winsLabel: SKLabelNode!
     
     var gameTimer = 0
     var timer = Timer()
@@ -150,7 +152,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-         
+        wins = defaults.integer(forKey: "win")
+        
         farthestDistance = defaults.integer(forKey: "dist")
         
         
@@ -161,7 +164,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         farthestLabel = (self.childNode(withName: "farthestLabel") as! SKLabelNode)
         livesLabel = (self.childNode(withName: "livesLabel") as! SKLabelNode)
         lives = 15
+        winsLabel = (self.childNode(withName: "winsLabel") as! SKLabelNode)
         timeLabel.fontSize = 30
+        
         winLoseOutlet = (self.childNode(withName: "statusLabel") as! SKLabelNode)
         winLoseOutlet.fontSize = 100
         winLoseOutlet.text = ""
@@ -210,7 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-        enumerateChildNodes(withName: "pgcar") { [self]
+        enumerateChildNodes(withName: "penguin") { [self]
             (node, _) in
             penguin = node as? SKSpriteNode
             
@@ -359,7 +364,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         distance = Int(player.position.y)
        
-        if(farDead == false){
+        if(farDeadd == false){
             if distance > farthestDistance{
                 farthestDistance = distance
                 defaults.set(farthestDistance, forKey: "dist")
@@ -369,12 +374,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timeLabel.text = "distance: \(distance)"
         farthestLabel.text = "farthest: \(farthestDistance)"
+        winsLabel.text = "Wins: \(wins)"
         farthestLabel.position.y = invisFollower.position.y + 800
         farthestLabel.position.x = invisFollower.position.x + 220
         timeLabel.position.y = invisFollower.position.y + 850
         timeLabel.position.x = invisFollower.position.x + 190
+        winsLabel.position.y = invisFollower.position.y + 750
+        winsLabel.position.x = invisFollower.position.x + 220
         farthestLabel.fontName = "AvenirNext-Bold"
         timeLabel.fontName = "AvenirNext-Bold"
+        winsLabel.fontName = "AvenirNext-Bold"
 
         livesLabel.text = "Lives: \(lives)"
         livesLabel.position.y = invisFollower.position.y + 750
@@ -568,12 +577,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func crash(){
         deathaffect()
         winLoseOutlet.text = "You Died"
-        player.physicsBody?.allowsRotation = true
         player.physicsBody?.friction = 0.5
         player.removeAllActions()
         gameOver = true
         GameOver()
-        farDead = true
+        farDeadd = true
         stopTimer()
     }
 
@@ -586,6 +594,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             lives = 0
             winLoseOutlet.text = "You Won?"
+            wins = wins + 1
+            defaults.set(wins, forKey: "win")
             player.physicsBody?.velocity.dx = 0
             player.physicsBody?.velocity.dy = 0
             player.position.x = -10000
@@ -822,7 +832,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trueCheckpoint = 0
         car6.position.x = -4000
         car6.physicsBody?.velocity.dx = 0
-        farDead = false
+        farDeadd = false
     }
     
 
@@ -840,8 +850,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     func deathaffect(){
-        let randomInt = Int.random(in: 0..<7)
-        player.run(SKAction.playSoundFileNamed("\(deathsounds[randomInt])",waitForCompletion:false));
+        var randomInt = Int.random(in : 1...7)
+                var deathsoundOfChoice = deathsoundnums[randomInt]
+                player.run(SKAction.playSoundFileNamed("\(deathsoundOfChoice)",waitForCompletion:false));
 
     }
     
