@@ -8,7 +8,10 @@
 import SpriteKit
 import GameplayKit
 import AVFoundation
-
+struct AppData{
+    static var mutebutt = 0
+    static var muteclicked = 0
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: SKSpriteNode!
@@ -54,7 +57,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var future2: SKSpriteNode!
     var future3: SKSpriteNode!
     
-    
+    let backgroundmusic = SKAudioNode(fileNamed: "bensound-goodmood")
+
     var restricted = false
     
     var wins = 0
@@ -183,11 +187,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
        
+        gameSound()
         
-        
-        let backgroundmusic = SKAudioNode(fileNamed: "bensound-goodmood")
-        addChild(backgroundmusic)
-        
+//        let backgroundmusic = SKAudioNode(fileNamed: "bensound-goodmood")
+//        addChild(backgroundmusic)
+//        
         let count = list.count
         
         
@@ -883,6 +887,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    func gameSound(){
+        
+            if AppData.mutebutt == 0{
+                addChild(backgroundmusic)
+                print("playing")
+            }
+            else if AppData.mutebutt != 0{
+                backgroundmusic.run(SKAction.stop())
+                print("muting")
+
+            }
+        }
+
     
     
 }

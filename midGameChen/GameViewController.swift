@@ -68,6 +68,11 @@ class GameViewController: UIViewController {
     @IBAction func restartAction(_ sender: UIButton) {
         play.restart()
     }
+    @IBAction func muteButt(_ sender: UIButton) {
+        AppData.mutebutt = 1 + AppData.mutebutt
+                play.gameSound()
+                print(AppData.mutebutt)
+    }
     
     
     override var prefersStatusBarHidden: Bool {

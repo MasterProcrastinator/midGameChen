@@ -26,6 +26,15 @@
                                     <action selector="restartAction:" destination="BV1-FR-VrT" eventType="touchUpInside" id="mEw-db-1xo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-Zz-vwc">
+                                <rect key="frame" x="16" y="150" width="60" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="speaker.slash" catalog="system"/>
+                                <connections>
+                                    <action selector="muteButt:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4Jl-hh-ysA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -39,6 +48,7 @@
     </scenes>
     <resources>
         <image name="arrow.counterclockwise.square" catalog="system" width="128" height="114"/>
+        <image name="speaker.slash" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
