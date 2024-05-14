@@ -49,8 +49,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ship: SKSpriteNode!
     var penguinSwim: SKSpriteNode!
     var orca: SKSpriteNode!
-    
-    
+    var farDead = false
+    var future1: SKSpriteNode!
+    var future2: SKSpriteNode!
+    var future3: SKSpriteNode!
     
     
     var restricted = false
@@ -158,12 +160,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timeLabel = (self.childNode(withName: "timeLabel") as! SKLabelNode)
         farthestLabel = (self.childNode(withName: "farthestLabel") as! SKLabelNode)
         livesLabel = (self.childNode(withName: "livesLabel") as! SKLabelNode)
-        lives = 5
+        lives = 15
         timeLabel.fontSize = 30
         winLoseOutlet = (self.childNode(withName: "statusLabel") as! SKLabelNode)
         winLoseOutlet.fontSize = 100
         winLoseOutlet.text = ""
         player = (self.childNode(withName: "player") as! SKSpriteNode)
+        future1 = (self.childNode(withName: "future1") as! SKSpriteNode)
+        future2 = (self.childNode(withName: "future2") as! SKSpriteNode)
+        future3 = (self.childNode(withName: "future3") as! SKSpriteNode)
         invisFollower = (self.childNode(withName: "follower") as! SKSpriteNode)
         self.camera = cam
         self.physicsWorld.contactDelegate = self
@@ -273,6 +278,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
+        
+        
+        
         if player.position.y >= 40500{
             restricted = true
             
@@ -288,6 +296,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else{
             restricted = false
+            future1.position.x = player.position.x
+            future1.position.y = player.position.y + 100
+            future2.position.x = player.position.x
+            future2.position.y = player.position.y + 200
+            future3.position.x = player.position.x
+            future3.position.y = player.position.y + 300
         }
         
         if (player.position.y > 42500 && player.position.x < 400 && player.position.x > -400){
@@ -345,12 +359,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         distance = Int(player.position.y)
        
-       if distance > farthestDistance{
-           farthestDistance = distance
-           defaults.set(farthestDistance, forKey: "dist")
-           
-       }
-        
+        if(farDead == false){
+            if distance > farthestDistance{
+                farthestDistance = distance
+                defaults.set(farthestDistance, forKey: "dist")
+                
+            }
+        }
         
         timeLabel.text = "distance: \(distance)"
         farthestLabel.text = "farthest: \(farthestDistance)"
@@ -558,6 +573,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeAllActions()
         gameOver = true
         GameOver()
+        farDead = true
+        stopTimer()
     }
 
 
@@ -639,7 +656,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if (contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == list[i].image) || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == list[i].image){
                 
-                if (contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "pgcar") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "pgcar"){
+                if (contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "penguin") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "penguin"){
                     break
                 }
                     
@@ -805,7 +822,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trueCheckpoint = 0
         car6.position.x = -4000
         car6.physicsBody?.velocity.dx = 0
-        stopTimer()
+        farDead = false
     }
     
 
