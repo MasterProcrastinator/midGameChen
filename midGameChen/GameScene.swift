@@ -508,7 +508,7 @@ muteSound()
                          (node, _) in
             car6 = node as? SKSpriteNode
             if(player.position.y > 42500){
-                car6.physicsBody?.velocity.dx = 1300
+                car6.physicsBody?.velocity.dx = 2000
             }
             else{
                 car6.physicsBody?.velocity.dx = 0
