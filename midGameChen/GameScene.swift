@@ -187,8 +187,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
        
-        gameSound()
-        
+muteSound()
 //        let backgroundmusic = SKAudioNode(fileNamed: "bensound-goodmood")
 //        addChild(backgroundmusic)
 //        
@@ -887,13 +886,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func gameSound(){
+    func muteSound(){
         
             if AppData.mutebutt == 0{
                 addChild(backgroundmusic)
                 print("playing")
             }
-            else if AppData.mutebutt != 0{
+            else if AppData.mutebutt == 1{
+                backgroundmusic.run(SKAction.stop())
+                print("muting")
+
+            }
+        }
+    func playSound(){
+        
+            if AppData.muteclicked == 1{
+                backgroundmusic.run(SKAction.play())
+             print("playing")
+            }
+            else if AppData.mutebutt == 0{
                 backgroundmusic.run(SKAction.stop())
                 print("muting")
 

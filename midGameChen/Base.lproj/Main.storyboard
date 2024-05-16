@@ -18,21 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAA-eh-2S8">
-                                <rect key="frame" x="16" y="59" width="60" height="65"/>
+                                <rect key="frame" x="16" y="59" width="62" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.24193917449999999" green="0.24193917449999999" blue="0.24193917449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="arrow.counterclockwise.square" catalog="system" title=""/>
+                                <buttonConfiguration key="configuration" style="tinted" image="arrow.counterclockwise.square" catalog="system" title=""/>
                                 <connections>
                                     <action selector="restartAction:" destination="BV1-FR-VrT" eventType="touchUpInside" id="mEw-db-1xo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-Zz-vwc">
-                                <rect key="frame" x="16" y="150" width="60" height="59"/>
+                                <rect key="frame" x="16" y="150" width="30" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.24193917449999999" green="0.24193917449999999" blue="0.24193917449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="speaker.slash" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="speaker.slash" catalog="system"/>
                                 <connections>
                                     <action selector="muteButt:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4Jl-hh-ysA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmp-8J-fGG">
+                                <rect key="frame" x="48" y="150" width="30" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.24193917449999999" green="0.24193917449999999" blue="0.24193917449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="speaker.wave.2.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="soundButt:" destination="BV1-FR-VrT" eventType="touchUpInside" id="7lb-yv-zd3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -49,6 +61,7 @@
     <resources>
         <image name="arrow.counterclockwise.square" catalog="system" width="128" height="114"/>
         <image name="speaker.slash" catalog="system" width="115" height="128"/>
+        <image name="speaker.wave.2.fill" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

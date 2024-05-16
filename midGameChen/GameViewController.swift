@@ -69,9 +69,15 @@ class GameViewController: UIViewController {
         play.restart()
     }
     @IBAction func muteButt(_ sender: UIButton) {
-        AppData.mutebutt = 1 + AppData.mutebutt
-                play.gameSound()
+        AppData.mutebutt = 1
+        AppData.muteclicked = 0
+        play.muteSound()
                 print(AppData.mutebutt)
+    }
+    @IBAction func soundButt(_ sender: UIButton) {
+        AppData.mutebutt = 0
+        AppData.muteclicked = 1
+        play.playSound()
     }
     
     
