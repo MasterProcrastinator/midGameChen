@@ -97,10 +97,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Vehicle(image: "car7", width: 305, height: 185, dx: -800, dy: 0, x: 900),
                 Vehicle(image: "car8", width: 1000, height: 127, dx: 100, dy: 0, x: -1000),
                 Vehicle(image: "penguin", width: 60, height: 60, dx: 50, dy: 0, x: -480),
-                Vehicle(image: "pbear", width: 220, height: 200, dx: 160, dy: 0, x: -480),
+                Vehicle(image: "pbear", width: 240, height: 180, dx: 160, dy: 0, x: -480),
                 Vehicle(image: "whiteFox", width: 160, height: 50, dx: -300, dy: 0, x: 480),
                 Vehicle(image: "snowmobile", width: 175, height: 100, dx: 400, dy: 0, x: -480),
-                Vehicle(image: "iceTrain", width: 2000, height: 150, dx: -50, dy: 0, x: 750),
+                Vehicle(image: "iceTrain", width: 2000, height: 150, dx: -50, dy: 0, x: 1300),
                 Vehicle(image: "mammoth", width: 730, height: 475, dx: 90, dy: 0, x: -700),
                 Vehicle(image: "armadillo", width: 80, height: 75, dx: 200, dy: 0, x: -400),
                 Vehicle(image: "camel", width: 110, height: 90, dx: -200, dy: 0, x: 400),
@@ -409,7 +409,7 @@ muteSound()
         if(player.position.y > 20000 && player.position.y < 32000){
             
             if (player.position.y >= invisFollower.position.y + 200){
-                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.5)
+                let moveFollower = SKAction.moveTo(y: player.position.y, duration: 0.3)
                 invisFollower.run(moveFollower)
                 
             }
@@ -629,6 +629,7 @@ muteSound()
                 teleportLastCheckpoint()
             }
             else{
+                lives -= 1
                 crash()
             }
             

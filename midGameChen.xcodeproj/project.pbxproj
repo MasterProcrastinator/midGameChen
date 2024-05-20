@@ -17,7 +17,6 @@
 		3E402E5F2BE92A930098333E /* death7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E402E5E2BE92A930098333E /* death7.mp3 */; };
 		3E402E612BE92A990098333E /* death8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E402E602BE92A990098333E /* death8.mp3 */; };
 		3E402E652BE92BEA0098333E /* fowardjump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E402E642BE92BEA0098333E /* fowardjump.mp3 */; };
-		3E9D3C602BF650C300C43FA7 /* sidejump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E9D3C5F2BF650C300C43FA7 /* sidejump.mp3 */; };
 		4C1EEE1D2BD2B5730027F5B9 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EEE1C2BD2B5730027F5B9 /* Vehicle.swift */; };
 		BFDB8C232B97741000170A23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDB8C222B97741000170A23 /* AppDelegate.swift */; };
 		BFDB8C252B97741000170A23 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BFDB8C242B97741000170A23 /* GameScene.sks */; };
@@ -60,7 +59,6 @@
 		3E402E5E2BE92A930098333E /* death7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = death7.mp3; sourceTree = "<group>"; };
 		3E402E602BE92A990098333E /* death8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = death8.mp3; sourceTree = "<group>"; };
 		3E402E642BE92BEA0098333E /* fowardjump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fowardjump.mp3; sourceTree = "<group>"; };
-		3E9D3C5F2BF650C300C43FA7 /* sidejump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sidejump.mp3; path = ../../../Downloads/sidejump.mp3; sourceTree = "<group>"; };
 		4C1EEE1C2BD2B5730027F5B9 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		BFDB8C1F2B97741000170A23 /* midGameChen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = midGameChen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDB8C222B97741000170A23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 				3E402E542BE92A750098333E /* death2.wav */,
 				3E402E5E2BE92A930098333E /* death7.mp3 */,
 				3E402E602BE92A990098333E /* death8.mp3 */,
-				3E9D3C5F2BF650C300C43FA7 /* sidejump.mp3 */,
 				3E402E642BE92BEA0098333E /* fowardjump.mp3 */,
 				3E402E5A2BE92A870098333E /* death5.mp3 */,
 				3E402E5C2BE92A8D0098333E /* death6.mp3 */,
@@ -282,7 +279,6 @@
 				3E402E5D2BE92A8D0098333E /* death6.mp3 in Resources */,
 				3E142B772BD0186A00B41813 /* bensound-goodmood.mp3 in Resources */,
 				BFDB8C302B97741200170A23 /* Assets.xcassets in Resources */,
-				3E9D3C602BF650C300C43FA7 /* sidejump.mp3 in Resources */,
 				3E402E652BE92BEA0098333E /* fowardjump.mp3 in Resources */,
 				BFDB8C332B97741200170A23 /* LaunchScreen.storyboard in Resources */,
 				BFDB8C272B97741000170A23 /* Actions.sks in Resources */,
