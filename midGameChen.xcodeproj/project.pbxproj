@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0FB36F2BFBA552006E5B05 /* sidejump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E0FB36E2BFBA552006E5B05 /* sidejump.mp3 */; };
 		3E142B772BD0186A00B41813 /* bensound-goodmood.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E142B762BD0186A00B41813 /* bensound-goodmood.mp3 */; };
 		3E402E532BE92A6E0098333E /* death1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E402E522BE92A6E0098333E /* death1.wav */; };
 		3E402E552BE92A750098333E /* death2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3E402E542BE92A750098333E /* death2.wav */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0FB36E2BFBA552006E5B05 /* sidejump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sidejump.mp3; path = ../../../Downloads/sidejump.mp3; sourceTree = "<group>"; };
 		3E142B762BD0186A00B41813 /* bensound-goodmood.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "bensound-goodmood.mp3"; sourceTree = "<group>"; };
 		3E402E522BE92A6E0098333E /* death1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death1.wav; sourceTree = "<group>"; };
 		3E402E542BE92A750098333E /* death2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = death2.wav; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				3E402E5E2BE92A930098333E /* death7.mp3 */,
 				3E402E602BE92A990098333E /* death8.mp3 */,
 				3E402E642BE92BEA0098333E /* fowardjump.mp3 */,
+				3E0FB36E2BFBA552006E5B05 /* sidejump.mp3 */,
 				3E402E5A2BE92A870098333E /* death5.mp3 */,
 				3E402E5C2BE92A8D0098333E /* death6.mp3 */,
 				3E402E562BE92A7B0098333E /* death3.mp3 */,
@@ -279,6 +282,7 @@
 				3E402E5D2BE92A8D0098333E /* death6.mp3 in Resources */,
 				3E142B772BD0186A00B41813 /* bensound-goodmood.mp3 in Resources */,
 				BFDB8C302B97741200170A23 /* Assets.xcassets in Resources */,
+				3E0FB36F2BFBA552006E5B05 /* sidejump.mp3 in Resources */,
 				3E402E652BE92BEA0098333E /* fowardjump.mp3 in Resources */,
 				BFDB8C332B97741200170A23 /* LaunchScreen.storyboard in Resources */,
 				BFDB8C272B97741000170A23 /* Actions.sks in Resources */,

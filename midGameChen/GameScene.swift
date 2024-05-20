@@ -841,8 +841,8 @@ muteSound()
     
 
     func sjump(){
-//        let sjump = SKAudioNode(fileNamed: "sidejump")
-//        addChild(sjump)
+        let sjump = SKAudioNode(fileNamed: "sidejump")
+        addChild(sjump)
         player.run(SKAction.playSoundFileNamed("sidejump",waitForCompletion:false));
 
     }
