@@ -32,7 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var armadillo: SKSpriteNode!
     var spider: SKSpriteNode!
     var camel: SKSpriteNode!
-    var scorpion: SKSpriteNode!
+    var Scorpion: SKSpriteNode!
     var tortoise: SKSpriteNode!
     var desertScourge: SKSpriteNode!
     var sandShark: SKSpriteNode!
@@ -104,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Vehicle(image: "mammoth", width: 730, height: 475, dx: 90, dy: 0, x: -700),
                 Vehicle(image: "armadillo", width: 80, height: 75, dx: 200, dy: 0, x: -400),
                 Vehicle(image: "camel", width: 110, height: 90, dx: -200, dy: 0, x: 400),
-                Vehicle(image: "scorpion", width: 80, height: 65, dx: -170, dy: 0, x: 400),
+                Vehicle(image: "Scorpion", width: 80, height: 65, dx: -170, dy: 0, x: 400),
                 Vehicle(image: "tortoise", width: 90, height: 75, dx: 170, dy: 0, x: -400),
                 Vehicle(image: "spider", width: 80, height: 70, dx: 150, dy: 0, x: -400),
                 Vehicle(image: "desertScourge", width: 400, height: 80, dx: -300, dy: 0, x: 400),
@@ -196,7 +196,7 @@ muteSound()
         
         
         //33
-        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
+        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, Scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
         
         
         
@@ -439,7 +439,7 @@ muteSound()
         
         
         
-        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
+        var testList = [car, car2, car3 ,car4, car5, car7, car8, penguin, pbear, mammoth, whiteFox, snowmobile, iceTrain, tortoise, spider, desertScourge, sandShark, spider2, Scorpion, armadillo, sandShark, moreIce, moreCrystal, iceberg, leviathan, shark, titanic, worseShark, sub, ship, penguinSwim, orca]
         
         for i in 0...count-1{
             
