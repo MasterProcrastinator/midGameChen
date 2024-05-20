@@ -92,7 +92,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var list = [Vehicle(image: "car", width: 80, height: 60, dx: -350, dy: 0, x: 480),
                 Vehicle(image: "car2", width: 60, height: 60, dx: 350, dy: 0, x: -480),
                 Vehicle(image: "car3", width: 141, height: 90, dx: 400, dy: 0, x: -480),
-                Vehicle(image: "car4", width: 175, height: 100, dx: 450, dy: 0, x: -480),
+                Vehicle(image: "car4", width: 175, height: 90, dx: 450, dy: 0, x: -480),
                 Vehicle(image: "car5", width: 114, height: 60, dx: -500, dy: 0, x: 480),
                 Vehicle(image: "car7", width: 305, height: 185, dx: -800, dy: 0, x: 900),
                 Vehicle(image: "car8", width: 1000, height: 127, dx: 100, dy: 0, x: -1000),
@@ -110,17 +110,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 Vehicle(image: "desertScourge", width: 400, height: 80, dx: -300, dy: 0, x: 400),
                 Vehicle(image: "sandShark", width: 200, height: 80, dx: -250, dy: 0, x: 400),
                 Vehicle(image: "spider2", width: 80, height: 70, dx: -200, dy: 0, x: 400),
-                Vehicle(image: "moreIce", width: 512, height: 512, dx: 0, dy: 0, x: 1000),
+                Vehicle(image: "moreIce", width: 480, height: 200, dx: 0, dy: 0, x: 1000),
                 Vehicle(image: "moreCrystal", width: 480, height: 200, dx: 0, dy: 0, x: 1000),
                 Vehicle(image: "iceberg", width: 150, height: 150, dx: 0, dy: 0, x: 1000),
-                Vehicle(image: "leviathan", width: 1500, height: 1000, dx: -100, dy: 0, x: 900),
-                Vehicle(image: "shark", width: 700, height: 400, dx: -300, dy: 0, x: 500),
-                Vehicle(image: "titanic", width: 1300, height: 400, dx: 200, dy: 0, x: -600),
+                Vehicle(image: "leviathan", width: 1500, height: 1000, dx: -100, dy: 0, x: 1500),
+                Vehicle(image: "shark", width: 700, height: 400, dx: -300, dy: 0, x: 700),
+                Vehicle(image: "titanic", width: 1300, height: 400, dx: 200, dy: 0, x: -1300),
                 Vehicle(image: "worseShark", width: 400, height: 240, dx: -500, dy: 0, x: 480),
-                Vehicle(image: "sub", width: 400, height: 270, dx: 240, dy: 0, x: -480),
-                Vehicle(image: "ship", width: 400, height: 285, dx: -260, dy: 0, x: 500),
-                Vehicle(image: "penguinSwim", width: 170, height: 190, dx: -400, dy: 0, x: 480),
-                Vehicle(image: "orca", width: 300, height: 130, dx: 350, dy: 0, x: -480)
+                Vehicle(image: "sub", width: 400, height: 270, dx: 250, dy: 0, x: -480),
+                Vehicle(image: "ship", width: 400, height: 285, dx: -260, dy: 0, x: 600),
+                Vehicle(image: "penguinSwim", width: 170, height: 90, dx: -400, dy: 0, x: 480),
+                Vehicle(image: "orca", width: 300, height: 130, dx: 350, dy: 0, x: -600)
                 
  
                 
@@ -595,7 +595,7 @@ muteSound()
         
         if(contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "car6") || (contact.bodyB.node?.name == "player" && contact.bodyA.node?.name == "car6"){
             
-            lives = 0
+            lives = -999
             winLoseOutlet.text = "You Won?"
             wins = wins + 1
             defaults.set(wins, forKey: "win")
