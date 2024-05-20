@@ -64,9 +64,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    @IBAction func debugButton(_ sender: UIButton) {
-        play.jumpUp()
-    }
     
     @IBAction func restartAction(_ sender: UIButton) {
         play.restart()
